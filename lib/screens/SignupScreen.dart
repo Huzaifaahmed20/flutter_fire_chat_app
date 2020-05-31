@@ -11,6 +11,9 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
+    final isFieldsEmpty = _emailController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _usernameController.text.isEmpty;
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
@@ -48,6 +51,7 @@ class SignupScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: TextField(
+                  obscureText: true,
                   controller: _passwordController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -66,11 +70,14 @@ class SignupScreen extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.black),
                   onPressed: auth.isLoading
                       ? null
-                      : () => auth.register(
+                      : () async {
+                          await auth.register(
                             _emailController.text,
                             _passwordController.text,
                             _usernameController.text,
-                          ),
+                          );
+                          Navigator.of(context).pop();
+                        },
                   icon: Icon(Icons.arrow_forward),
                   label: auth.isLoading
                       ? CircularProgressIndicator()

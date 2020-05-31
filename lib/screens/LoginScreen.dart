@@ -6,6 +6,7 @@ import './SignupScreen.dart';
 import '../providers/AuthProvider.dart';
 
 class LoginScreen extends StatelessWidget {
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -66,13 +67,19 @@ class LoginScreen extends StatelessWidget {
                         horizontal: 100, vertical: 20),
                     highlightedBorderColor: Colors.green,
                     borderSide: BorderSide(color: Colors.black),
-                    onPressed: () {
-                      auth.login(_emailController.text,
-                          _passwordController.text, _phoneController.text);
-                      // Navigator.of(context).pushNamed(HomeScreen.routeName);
-                    },
+                    onPressed: auth.isLoading
+                        ? null
+                        : () {
+                            auth.login(
+                                _emailController.text,
+                                _passwordController.text,
+                                _phoneController.text);
+                            // Navigator.of(context).pushNamed(HomeScreen.routeName);
+                          },
                     icon: Icon(Icons.arrow_forward),
-                    label: Text('Login')),
+                    label: auth.isLoading
+                        ? CircularProgressIndicator()
+                        : Text('Login')),
               ),
               Text('Or'),
               FlatButton(
