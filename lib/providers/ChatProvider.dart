@@ -48,7 +48,10 @@ class ChatProvider extends ChangeNotifier {
 
   Stream<QuerySnapshot> fetchMessages(String receiverId, String senderId) {
     try {
-      final snapshot = db.collection('messages').orderBy('date').snapshots();
+      final snapshot = db
+          .collection('messages')
+          .orderBy('date')
+          .snapshots();
       return snapshot;
     } catch (e) {
       print(e);

@@ -69,8 +69,12 @@ class ChatScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: FlatButton(
-                      onPressed: () => chatProvider.sendMessage(
-                          receiver.id, sender.uid, _messageBodyController.text),
+                      onPressed: () {
+                        chatProvider.sendMessage(receiver.id, sender.uid,
+                            _messageBodyController.text);
+                        FocusScope.of(context).unfocus();
+                        _messageBodyController.clear();
+                      },
                       child: Text('Send'),
                     ),
                   )

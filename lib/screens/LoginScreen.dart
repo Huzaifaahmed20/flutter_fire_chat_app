@@ -22,19 +22,19 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextField(
-                  keyboardType: TextInputType.phone,
-                  controller: _phoneController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.phone,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(20.0),
+              //   child: TextField(
+              //     keyboardType: TextInputType.phone,
+              //     controller: _phoneController,
+              //     decoration: InputDecoration(
+              //       border: OutlineInputBorder(),
+              //       prefixIcon: Icon(
+              //         Icons.phone,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: TextField(
