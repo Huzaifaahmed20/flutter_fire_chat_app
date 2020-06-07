@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-import '../models/UserModel.dart';
 
 class AuthProvider extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
@@ -33,7 +32,6 @@ class AuthProvider extends ChangeNotifier {
         .user;
 
     stopLoader();
-    // notifyListeners();
     return _user;
 
     // final PhoneVerificationCompleted verified = (AuthCredential authResult) {
@@ -82,7 +80,6 @@ class AuthProvider extends ChangeNotifier {
     });
 
     stopLoader();
-    // notifyListeners();
     return _user;
   }
 

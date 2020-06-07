@@ -8,6 +8,7 @@ import './providers/ChatProvider.dart';
 import './screens/HomeScreen.dart';
 import './screens/SignupScreen.dart';
 import './screens/LoginScreen.dart';
+import './screens/ChatScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         home: MainApp(),
         routes: {
           SignupScreen.routeName: (_) => SignupScreen(),
+          ChatScreen.routeName: (_) => ChatScreen(),
         },
       ),
     );
@@ -38,7 +40,6 @@ class MainApp extends StatelessWidget {
     return StreamBuilder<FirebaseUser>(
         stream: auth.isAuth,
         builder: (context, snapshot) {
-          print(snapshot.data);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),

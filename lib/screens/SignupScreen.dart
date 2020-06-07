@@ -11,9 +11,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
-    final isFieldsEmpty = _emailController.text.isEmpty ||
-        _passwordController.text.isEmpty ||
-        _usernameController.text.isEmpty;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),

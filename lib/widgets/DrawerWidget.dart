@@ -38,7 +38,6 @@ class DrawerWidget extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.people),
                   title: Text('Friends'),
-                  
                 ),
                 ListTile(
                   leading: Icon(Icons.settings),

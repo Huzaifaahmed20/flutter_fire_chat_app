@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_chat_app/models/MessagesModel.dart';
 
 import '../models/UserModel.dart';
 
@@ -19,6 +19,8 @@ class ChatProvider extends ChangeNotifier {
   }
 
   List<UserModel> _users = [];
+  List<MessagesModel> _messages = [];
+  List<MessagesModel> get messages => _messages;
 
   List<UserModel> get users => _users;
 
@@ -42,5 +44,34 @@ class ChatProvider extends ChangeNotifier {
     } catch (e) {
       print(e);
     }
+  }
+
+  Stream<QuerySnapshot> fetchMessages(String receiverId, String senderId) {
+    try {
+      final snapshot = db.collection('messages').orderBy('date').snapshots();
+      return snapshot;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
+
+  Future<void> sendMessage(
+      String receiverId, String senderId, String messageBody) async {
+    print(receiverId);
+    print(senderId);
+    print(messageBody);
+    final documentRef = db.collection('messages').document();
+
+    db.runTransaction((transaction) async {
+      DocumentSnapshot freshSnap = await transaction.get(documentRef);
+      await transaction.set(freshSnap.reference, {
+        'receiverId': receiverId,
+        'senderId': senderId,
+        'messageBody': messageBody,
+        'date': DateTime.now().millisecondsSinceEpoch
+      });
+    });
+    notifyListeners();
   }
 }

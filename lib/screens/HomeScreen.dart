@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/screens/ChatScreen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/ChatProvider.dart';
@@ -33,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final chats = Provider.of<ChatProvider>(context);
     final appUsers =
         chats.users.where((element) => element.id != widget.user.uid).toList();
-    // print(appUsers);
-    // final isLoading = chats.isLoading;
     return Scaffold(
       drawer: DrawerWidget(widget.user),
       appBar: AppBar(
@@ -46,6 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: appUsers.length,
               itemBuilder: (ctx, idx) => ListTile(
                 title: Text('${appUsers[idx].name}'),
+                onTap: () => Navigator.of(context).pushNamed(
+                  ChatScreen.routeName,
+                  arguments: {'user':appUsers[idx],'loggedInUser':widget.user},
+                ),
               ),
             ),
     );
