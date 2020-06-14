@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_chat_app/models/UserModel.dart';
 import 'package:flutter_chat_app/providers/AuthProvider.dart';
+import 'package:flutter_chat_app/ui/views/dashboard/dashboard_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatelessWidget {
-  final FirebaseUser user;
-  DrawerWidget(this.user);
+  final DashboardViewModel model;
+  DrawerWidget(this.model);
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthProvider>(context);
+    // final auth = Provider.of<AuthProvider>(context);
     return Drawer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,7 +27,7 @@ class DrawerWidget extends StatelessWidget {
             height: 200,
             child: Center(
                 child: Text(
-              '${user.displayName}',
+              '${model.user.name}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,
@@ -54,7 +56,7 @@ class DrawerWidget extends StatelessWidget {
             textColor: Colors.white,
             child: Text('Logout'),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            onPressed: () => auth.logOut(),
+            onPressed: () => model.signOut(),
           )
         ],
       ),

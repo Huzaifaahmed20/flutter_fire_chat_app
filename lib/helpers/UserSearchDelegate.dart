@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/models/UserModel.dart';
-import '../widgets/UsersList.dart';
+import '../ui/widgets/UsersList.dart';
 
 
 class UserSearchDelegate extends SearchDelegate<String> {
-  UserSearchDelegate({this.users, this.chats, this.widget});
+  UserSearchDelegate({this.users});
   List<UserModel> users;
-  final chats;
-  final widget;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -50,6 +48,6 @@ class UserSearchDelegate extends SearchDelegate<String> {
         child: Text('No users found'),
       );
     }
-    return UsersList(chats: chats, appUsers: searcUsers, widget: widget);
+    return UsersList(users: searcUsers);
   }
 }

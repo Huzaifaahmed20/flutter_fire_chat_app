@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_chat_app/models/UserModel.dart';
+// import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../models/UserModel.dart';
-import '../providers/ChatProvider.dart';
-import '../widgets/MessagesList.dart';
+// import '../models/UserModel.dart';
+// import '../providers/ChatProvider.dart';
+// import '../../widgets/MessagesList.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatView extends StatelessWidget {
   static const routeName = '/chat';
   final TextEditingController _messageBodyController = TextEditingController();
 
@@ -28,7 +29,7 @@ class ChatScreen extends StatelessWidget {
           .toList();
     }
 
-    final chatProvider = Provider.of<ChatProvider>(context);
+    // final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(receiver.name),
@@ -37,26 +38,26 @@ class ChatScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-              stream: chatProvider.fetchMessages(receiver.id, sender.uid),
-              builder: (ctx, snap) {
-                if (!snap.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+            // StreamBuilder<QuerySnapshot>(
+            //   stream: chatProvider.fetchMessages(receiver.id, sender.uid),
+            //   builder: (ctx, snap) {
+            //     if (!snap.hasData) {
+            //       return Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     }
 
-                final messages = fetchUserMessages(snap.data.documents);
+            //     final messages = fetchUserMessages(snap.data.documents);
 
-                if (messages.length == 0) {
-                  return Center(
-                    child: Text('No Chat found'),
-                  );
-                }
+            //     if (messages.length == 0) {
+            //       return Center(
+            //         child: Text('No Chat found'),
+            //       );
+            //     }
 
-                return MessagesList(messages: messages, sender: sender);
-              },
-            ),
+            //     return MessagesList(messages: messages, sender: sender);
+            //   },
+            // ),
             Container(
               child: Row(
                 children: <Widget>[
@@ -70,10 +71,10 @@ class ChatScreen extends StatelessWidget {
                   Expanded(
                     child: FlatButton(
                       onPressed: () {
-                        chatProvider.sendMessage(receiver.id, sender.uid,
-                            _messageBodyController.text);
-                        FocusScope.of(context).unfocus();
-                        _messageBodyController.clear();
+                        // chatProvider.sendMessage(receiver.id, sender.uid,
+                        //     _messageBodyController.text);
+                        // FocusScope.of(context).unfocus();
+                        // _messageBodyController.clear();
                       },
                       child: Text('Send'),
                     ),
