@@ -7,11 +7,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_chat_app/models/UserModel.dart';
 import 'package:flutter_chat_app/ui/views/startup/startup_view.dart';
 import 'package:flutter_chat_app/ui/views/login/login_view.dart';
 import 'package:flutter_chat_app/ui/views/signup/signup_view.dart';
 import 'package:flutter_chat_app/ui/views/dashboard/dashboard_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_chat_app/ui/views/chat/chat_view.dart';
 
 abstract class Routes {
@@ -34,8 +34,7 @@ class Router extends RouterBase {
   Set<String> get allRoutes => Routes.all;
 
   @Deprecated('call ExtendedNavigator.ofRouter<Router>() directly')
-  static ExtendedNavigatorState get navigator =>
-      ExtendedNavigator.ofRouter<Router>();
+  static ExtendedNavigatorState get navigator => ExtendedNavigator.ofRouter<Router>();
 
   @override
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -45,8 +44,7 @@ class Router extends RouterBase {
         if (hasInvalidArgs<StartupViewArguments>(args)) {
           return misTypedArgsRoute<StartupViewArguments>(args);
         }
-        final typedArgs =
-            args as StartupViewArguments ?? StartupViewArguments();
+        final typedArgs = args as StartupViewArguments ?? StartupViewArguments();
         return MaterialPageRoute<dynamic>(
           builder: (context) => StartupView(key: typedArgs.key),
           settings: settings,
@@ -72,8 +70,10 @@ class Router extends RouterBase {
           settings: settings,
         );
       case Routes.chatViewRoute:
+        final typedArgs = args as ChatViewArguments;
+
         return MaterialPageRoute<dynamic>(
-          builder: (context) => ChatView(),
+          builder: (context) => ChatView(typedArgs.friend),
           settings: settings,
         );
       default:
@@ -97,3 +97,9 @@ class StartupViewArguments {
 //   final FirebaseUser user;
 //   DashboardViewArguments({@required this.user});
 // }
+
+//DashboardView arguments holder class
+class ChatViewArguments {
+  final UserModel friend;
+  ChatViewArguments({@required this.friend});
+}

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/ui/views/dashboard/dashboard_viewmodel.dart';
 import 'package:stacked/stacked.dart';
@@ -22,15 +21,12 @@ class DashboardView extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.search),
-                onPressed: () => showSearch(
-                    context: context,
-                    delegate: UserSearchDelegate(users: model.data)),
+                onPressed: () =>
+                    showSearch(context: context, delegate: UserSearchDelegate(users: model.data)),
               )
             ],
           ),
-          body: model.isBusy
-              ? LinearProgressIndicator()
-              : UsersList(users: model.data),
+          body: model.isBusy ? LinearProgressIndicator() : UsersList(users: model.data),
         );
       },
       viewModelBuilder: () => DashboardViewModel(),

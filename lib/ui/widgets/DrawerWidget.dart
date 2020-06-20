@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_chat_app/models/UserModel.dart';
-import 'package:flutter_chat_app/providers/AuthProvider.dart';
 import 'package:flutter_chat_app/ui/views/dashboard/dashboard_viewmodel.dart';
-import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatelessWidget {
   final DashboardViewModel model;

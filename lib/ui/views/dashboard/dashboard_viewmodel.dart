@@ -1,12 +1,15 @@
 import 'package:flutter_chat_app/app/locator.dart';
+import 'package:flutter_chat_app/app/router.gr.dart';
 import 'package:flutter_chat_app/models/UserModel.dart';
 import 'package:flutter_chat_app/services/auth_service.dart';
 import 'package:flutter_chat_app/services/firestore_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class DashboardViewModel extends FutureViewModel<List<UserModel>> {
   final AuthService _authService = locator<AuthService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
+  final NavigationService _navigationService = locator<NavigationService>();
 
   UserModel get user => _authService.currentUser;
 
@@ -19,5 +22,8 @@ class DashboardViewModel extends FutureViewModel<List<UserModel>> {
     return users();
   }
 
-  void signOut() => _authService.logOut();
+  void signOut() {
+    _authService.logOut();
+    _navigationService.replaceWith(Routes.loginViewRoute);
+  }
 }
