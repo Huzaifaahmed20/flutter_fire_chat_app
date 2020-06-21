@@ -9,8 +9,16 @@ class LoginViewModel extends BaseViewModel {
   final AuthService _authService = locator<AuthService>();
   final DialogService _dialogService = locator<DialogService>();
 
-  void navigateToSignUp() =>
-      _navigationService.navigateTo(Routes.signupViewRoute);
+  bool _hidePasswordValue = true;
+
+  bool get hidePassword => _hidePasswordValue;
+
+  void togglePasswordValue() {
+    _hidePasswordValue = !_hidePasswordValue;
+    notifyListeners();
+  }
+
+  void navigateToSignUp() => _navigationService.navigateTo(Routes.signupViewRoute);
 
   Future login({String email, String password}) async {
     setBusy(true);

@@ -14,7 +14,7 @@ class StartupView extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/images/splash.gif'),
+              Hero(tag: 'splash', child: Image.asset('assets/images/splash.gif')),
               Text(
                 'Flutter Fire Chat',
                 style: TextStyle(fontSize: 30),

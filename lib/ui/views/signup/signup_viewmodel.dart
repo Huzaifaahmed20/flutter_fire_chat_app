@@ -9,10 +9,18 @@ class SignupViewModel extends BaseViewModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
+  bool _hidePasswordValue = true;
+
+  bool get hidePassword => _hidePasswordValue;
+
+  void togglePasswordValue() {
+    _hidePasswordValue = !_hidePasswordValue;
+    notifyListeners();
+  }
+
   Future signUp({String email, String password, String name}) async {
     setBusy(true);
-    final result = await _authService.signUpWithEmail(
-        email: email, password: password, name: name);
+    final result = await _authService.signUpWithEmail(email: email, password: password, name: name);
 
     if (result is bool) {
       if (result) {
