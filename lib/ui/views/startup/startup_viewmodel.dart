@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_chat_app/app/locator.dart';
 import 'package:flutter_chat_app/app/router.gr.dart';
 import 'package:flutter_chat_app/services/auth_service.dart';
@@ -12,12 +14,14 @@ class StartupViewModel extends BaseViewModel {
       locator<FirebasePushNotificationService>();
 
   Future handleStartUpLogic() async {
-    await _pushNotificationService.initialize();
-    bool hasLoggedInUser = await _authService.isUserLoggedIn();
-    if (hasLoggedInUser) {
-      _navigationService.replaceWith(Routes.dashboardViewRoute);
-    } else {
-      _navigationService.replaceWith(Routes.loginViewRoute);
-    }
+    Timer(Duration(seconds: 2), () async {
+      await _pushNotificationService.initialize();
+      bool hasLoggedInUser = await _authService.isUserLoggedIn();
+      if (hasLoggedInUser) {
+        _navigationService.replaceWith(Routes.dashboardViewRoute);
+      } else {
+        _navigationService.replaceWith(Routes.loginViewRoute);
+      }
+    });
   }
 }

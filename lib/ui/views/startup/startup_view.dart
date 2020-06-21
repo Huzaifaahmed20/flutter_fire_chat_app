@@ -10,10 +10,17 @@ class StartupView extends StatelessWidget {
     return ViewModelBuilder<StartupViewModel>.reactive(
       onModelReady: (model) => model.handleStartUpLogic(),
       builder: (context, model, child) => Scaffold(
-        body: Center(
-          child: Text('Start up view'),
-        ),
-      ),
+          backgroundColor: Colors.white,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('assets/images/splash.gif'),
+              Text(
+                'Flutter Fire Chat',
+                style: TextStyle(fontSize: 30),
+              ),
+            ],
+          )),
       viewModelBuilder: () => StartupViewModel(),
     );
   }
