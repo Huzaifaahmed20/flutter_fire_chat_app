@@ -16,6 +16,7 @@ class MessagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+        reverse: true,
         itemCount: messages.length,
         itemBuilder: (ctx, idx) {
           bool isSent = messages[idx].senderId != friendId;

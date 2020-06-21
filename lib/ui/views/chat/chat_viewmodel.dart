@@ -23,7 +23,7 @@ class ChatViewModel extends BaseViewModel {
       senderId: _authService.currentUser.id,
       createdAt: DateTime.now().millisecondsSinceEpoch,
     );
-    await _firestoreService.createMessage(message);
+    return await _firestoreService.createMessage(message);
   }
 
   void listenToMessages(String friendId) {

@@ -78,7 +78,7 @@ class FirestoreService {
   }
 
   void _requestMessages(String friendId, String currentUserId) {
-    var messagesQuerySnapshot = _messagesCollectionReference.orderBy('createdAt');
+    var messagesQuerySnapshot = _messagesCollectionReference.orderBy('createdAt', descending: true);
 
     messagesQuerySnapshot.snapshots().listen((messageSnapshot) {
       if (messageSnapshot.documents.isNotEmpty) {

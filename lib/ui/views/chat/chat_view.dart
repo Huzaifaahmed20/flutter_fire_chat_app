@@ -19,26 +19,24 @@ class ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget buildChatMessages(model, friendId) {
-      if (model.messages.length == 0) {
+      if (model.isBusy) {
         return Center(
-          child: Text('No Messages to show'),
+          child: CircularProgressIndicator(),
         );
       } else {
-        if (model.isBusy) {
+        if (model.messages.length == 0) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Text('No Messages to show'),
           );
         }
-        return Container(
-          child: MessagesList(messages: model.messages, friendId: friend.id),
-        );
+
+        return MessagesList(messages: model.messages, friendId: friend.id);
       }
     }
 
     return ViewModelBuilder<ChatViewModel>.reactive(
       onModelReady: (model) => model.listenToMessages(friend.id),
       builder: (context, model, child) {
-        print('MESSAGES ${model.messages}');
         return Scaffold(
           appBar: AppBar(
             title: Text(friend.name),
@@ -60,7 +58,10 @@ class ChatView extends StatelessWidget {
                     ),
                     Expanded(
                       child: FlatButton(
-                        onPressed: () => model.sendMessage(_messageBodyController.text, friend.id),
+                        onPressed: () {
+                          model.sendMessage(_messageBodyController.text, friend.id);
+                          _messageBodyController.clear();
+                        },
                         child: Text('Send'),
                       ),
                     )
