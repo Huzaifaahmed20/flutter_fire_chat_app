@@ -9,6 +9,15 @@ class SignupView extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
 
+  final FocusNode _usernameFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+
+  void _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignupViewModel>.reactive(
@@ -28,56 +37,96 @@ class SignupView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                'assets/images/splash.gif',
+                'assets/images/splash.jpg',
                 height: 300,
                 width: 300,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: TextField(
-                  enabled: !model.isBusy,
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.person,
+              Card(
+                elevation: 3,
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: TextField(
+                    textInputAction: TextInputAction.next,
+                    focusNode: _usernameFocus,
+                    onEditingComplete: () =>
+                        _fieldFocusChange(context, _usernameFocus, _emailFocus),
+                    style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                    enabled: !model.isBusy,
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Colors.blueGrey,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: TextField(
-                  enabled: !model.isBusy,
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.email,
+              SizedBox(height: 10),
+              Card(
+                elevation: 3,
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: TextField(
+                    textInputAction: TextInputAction.next,
+                    focusNode: _emailFocus,
+                    onEditingComplete: () =>
+                        _fieldFocusChange(context, _emailFocus, _passwordFocus),
+                    style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                    enabled: !model.isBusy,
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.blueGrey,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: TextField(
-                  enabled: !model.isBusy,
-                  obscureText: model.hidePassword,
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(
-                      Icons.vpn_key,
+              SizedBox(height: 10),
+              Card(
+                elevation: 3,
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: TextField(
+                    textInputAction: TextInputAction.done,
+                    focusNode: _passwordFocus,
+                    onEditingComplete: () => model.signUp(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      name: _usernameController.text,
                     ),
-                    suffixIcon: IconButton(
-                      onPressed: () => model.togglePasswordValue(),
-                      icon: Icon(
-                          model.hidePassword ? Icons.enhanced_encryption : Icons.remove_red_eye),
+                    style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                    obscureText: model.hidePassword,
+                    enabled: !model.isBusy,
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.vpn_key,
+                        color: Colors.blueGrey,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () => model.togglePasswordValue(),
+                        icon: Icon(
+                          model.hidePassword ? Icons.enhanced_encryption : Icons.remove_red_eye,
+                          color: Colors.blueGrey,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 40),
               BusyButton(
                 onPressed: () => model.signUp(
                   email: _emailController.text,

@@ -17,7 +17,13 @@ class DashboardView extends StatelessWidget {
         return Scaffold(
           drawer: DrawerWidget(model),
           appBar: AppBar(
-            title: Text(model.user.name),
+            iconTheme: IconThemeData(color: Colors.black54),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: Text(
+              'Hi, ${model.user.name}',
+              style: TextStyle(color: Colors.black54, fontSize: 25),
+            ),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.search),

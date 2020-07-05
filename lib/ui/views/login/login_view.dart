@@ -34,7 +34,7 @@ class LoginView extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Image.asset(
-                'assets/images/splash.gif',
+                'assets/images/splash.jpg',
                 height: 300,
                 width: 300,
               ),
