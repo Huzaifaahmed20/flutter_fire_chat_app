@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
 
-
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
     Key key,
@@ -14,20 +13,21 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double px = 1 / MediaQuery.of(context).devicePixelRatio;
-
     return Bubble(
       margin: isSent
-          ? BubbleEdges.only(top: 10, right: 10)
-          : BubbleEdges.only(top: 10, left: 10),
+          ? BubbleEdges.only(top: 10, right: 20)
+          : BubbleEdges.only(top: 10, left: 20),
       padding: BubbleEdges.all(15),
-      elevation: 1 * px,
+      elevation: 5,
+      nipRadius: 5,
+      nipWidth: 30,
+      nipHeight: 10,
       alignment: isSent ? Alignment.topRight : Alignment.topLeft,
-      nip: isSent ? BubbleNip.rightTop : BubbleNip.leftTop,
-      color: isSent ? Colors.purple : Colors.black87,
+      nip: isSent ? BubbleNip.rightBottom : BubbleNip.leftTop,
+      color: isSent ? Colors.blue : Colors.grey[200],
       child: Text(
         message,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: isSent ? Colors.white : Colors.black),
       ),
     );
   }
