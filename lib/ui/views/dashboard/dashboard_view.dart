@@ -22,7 +22,7 @@ class DashboardView extends StatelessWidget {
             backgroundColor: Colors.transparent,
             title: Text(
               'Hi, ${model.user.name}',
-              style: TextStyle(color: Colors.black54, fontSize: 25),
+              style: TextStyle(color: Colors.black54, fontSize: 20),
             ),
             actions: <Widget>[
               IconButton(

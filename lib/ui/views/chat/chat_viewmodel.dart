@@ -10,6 +10,7 @@ class ChatViewModel extends BaseViewModel {
 
   List<MessagesModel> _messages = [];
   List<MessagesModel> get messages => _messages;
+  bool isShowEmojiPicker = false;
 
   // Stream listenToMessages() {}
 
@@ -40,5 +41,10 @@ class ChatViewModel extends BaseViewModel {
 
       setBusy(false);
     });
+  }
+
+  void showEmojiPicker() {
+    isShowEmojiPicker = !isShowEmojiPicker;
+    notifyListeners();
   }
 }

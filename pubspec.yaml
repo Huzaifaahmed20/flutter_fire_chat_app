@@ -24,7 +24,11 @@ dependencies:
   firebase_auth: ^0.15.5+3
   cloud_firestore: ^0.13.4+2
   firebase_messaging: ^6.0.16
+  #ui
   bubble: ^1.1.9+1
+  emoji_picker: ^0.1.0
+  #utils
+  basic_utils: ^2.5.5
 
   # state management
   stacked: ^1.5.7+1
