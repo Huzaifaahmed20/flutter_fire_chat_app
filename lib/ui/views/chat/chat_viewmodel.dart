@@ -17,11 +17,14 @@ class ChatViewModel extends BaseViewModel {
   // @override
   // Stream get stream => listenToMessages();
 
-  Future sendMessage(String messageBody, String receiverId) async {
+  Future sendMessage(
+      String messageBody, String receiverId, String receiverName) async {
     final MessagesModel message = MessagesModel(
       messageBody: messageBody,
       receiverId: receiverId,
       senderId: _authService.currentUser.id,
+      senderName: _authService.currentUser.name,
+      receiverName: receiverName,
       createdAt: DateTime.now().millisecondsSinceEpoch,
     );
     return await _firestoreService.createMessage(message);
@@ -37,6 +40,8 @@ class ChatViewModel extends BaseViewModel {
       if (updatedMessages != null && updatedMessages.length > 0) {
         _messages = updatedMessages;
         notifyListeners();
+      } else {
+        setBusy(false);
       }
 
       setBusy(false);

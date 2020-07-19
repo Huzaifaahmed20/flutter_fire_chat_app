@@ -15,7 +15,7 @@ class StartupViewModel extends BaseViewModel {
 
   Future handleStartUpLogic() async {
     Timer(Duration(seconds: 2), () async {
-      // await _pushNotificationService.initialize();
+      await _pushNotificationService.initialize();
       bool hasLoggedInUser = await _authService.isUserLoggedIn();
       if (hasLoggedInUser) {
         _navigationService.replaceWith(Routes.dashboardViewRoute);

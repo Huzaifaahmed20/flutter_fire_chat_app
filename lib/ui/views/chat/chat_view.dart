@@ -93,8 +93,8 @@ class ChatView extends StatelessWidget {
                         if (_messageBodyController.text.isEmpty) {
                           return;
                         }
-                        model.sendMessage(
-                            _messageBodyController.text, friend.id);
+                        model.sendMessage(_messageBodyController.text,
+                            friend.id, friend.name);
                         _messageBodyController.clear();
                       },
                       icon: Icon(
